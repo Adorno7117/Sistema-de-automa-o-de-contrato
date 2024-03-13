@@ -1,11 +1,11 @@
 from openpyxl import load_workbook
-from doxc import Document
+from docx import Document
 from datetime import datetime
 
-planilhaForncedor = load_workbook('./fornercedores.xlsx')
+planilhaForncedor = load_workbook('./sistema-de-automacao/fornecedores.xlsx')
 paginaForncedor = planilhaForncedor['Sheet1']
 
-for linha in paginaForncedor.inter_rows(min_row=2, values_only=True):
+for linha in paginaForncedor.iter_rows(min_row=2, values_only=True):
     nomeEmpresa,endereco, cidade, estado, cep, telefone, email, setor = linha
 
     arquivoWord = Document()
@@ -41,4 +41,4 @@ for linha in paginaForncedor.inter_rows(min_row=2, values_only=True):
     
     arquivoWord.add_paragraph(texto_contrato)
 
-    arquivoWord.save(f'./contratos_{nomeEmpresa}.docx')
+    arquivoWord.save(f'./sistema-de-automacao/contratos/contratos_{nomeEmpresa}.docx')
